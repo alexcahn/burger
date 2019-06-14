@@ -1,13 +1,14 @@
 const express = require('express');
-const path = require('path')
+const exphbs = require('express-handlebars');
 
 const PORT = process.env.PORT || 3000;
-
-var app = express();
+const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 app.listen(PORT, function () {
   console.log("App listening on PORT " + PORT);
