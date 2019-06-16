@@ -1,0 +1,14 @@
+{{#each cahn}}
+<h1>{{burger_name}}</h1>
+<h1>{{id}}</h1>
+<h1>{{devoured}}</h1>
+
+
+{{/each}}
+
+<form action="/create" method="POST">
+   <div class="form-group">
+   <input type="text" name="burger_name" placeholder="insert your burger">
+  </div>
+  <button type="submit">Submit</button>
+</form>
