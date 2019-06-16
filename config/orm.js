@@ -11,7 +11,6 @@ function printQuestionMarks(num) {
 }
 
 function objToSql(ob) {
-        // column1=value, column2=value2,...
         var arr = [];
 
         for (var key in ob) {
@@ -31,6 +30,7 @@ var orm = {
                         fcallback(result);
                 });
         },
+
         insertOne: function (tableName, columns, values, fcallback) {
                 let queryString = "INSERT INTO " + tableName;
                 queryString += " (";
@@ -46,11 +46,25 @@ var orm = {
                         fcallback(result)
                 })
 
-                // }
-                // updateOne: function() {
-                //     let queryString = "UPDATE burgers WHERE (burger_name=?, devoured=?)";
+        },
 
-                // }
+        updateOne: function (tableName, objColsVals, condition, fcallback) {
+                let queryString = "UPDATE " + tableName;
+
+                queryString += " SET ";
+		queryString += objToSql(objColsVals);
+		queryString += " WHERE ";
+                queryString += condition;
+                
+                connection.query(queryString, function(err, result) {
+			if (err) {
+				throw err;
+			}
+
+			// Return results in callback
+			fcallback(result);
+		});
         }
 }
+
 module.exports = orm;
