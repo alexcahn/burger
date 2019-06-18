@@ -1,10 +1,13 @@
 const express = require('express');
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const exphbs = require('express-handlebars');
-var methodOverride = require('method-override');
+const methodOverride = require('method-override');
+const path = require('path');
 
 const PORT = process.env.PORT || 3000;
 const app = express();
+
+app.use(express.static(path.join(__dirname, '/public')));
 
 // Serve static content for the app from the 'public' directory
 app.use(express.static(process.cwd() + '/public'));
